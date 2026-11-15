@@ -189,8 +189,17 @@ function renderizarTarjetasHabitaciones() {
   // 2. Vaciamos la grilla para no duplicar
   roomGrid.innerHTML = ""; 
 
+  const NOMBRES_CATEGORIAS = {
+    simple: "Habitación Simple",
+    doble: "Habitación Doble",
+    deluxe: "Deluxe Premium",
+    suite: "Suite Suiza"
+  };
+
   // 3. Creamos las tarjetas según la cantidad (ROOM_COUNTS)
   Object.entries(ROOM_COUNTS).forEach(([categoriaKey, cantidad]) => {
+    const nombreCat = NOMBRES_CATEGORIAS[categoriaKey];
+    
     for (let i = 1; i <= cantidad; i++) {
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = htmlMolde;
@@ -199,6 +208,27 @@ function renderizarTarjetasHabitaciones() {
       nuevaTarjeta.dataset.category = categoriaKey;
       nuevaTarjeta.dataset.roomNumber = String(i).padStart(2, "0");
       
+      // 🔥 SOLUCIÓN 1: Actualizar el título de la tarjeta para que coincida con la categoría
+      const h3 = nuevaTarjeta.querySelector("h3");
+      if (h3) h3.textContent = nombreCat;
+
+      // 🔥 SOLUCIÓN 2: Actualizar el precio mostrado en la tarjeta
+      const strongPrecio = nuevaTarjeta.querySelector(".room-title strong");
+      if (strongPrecio && ROOM_PRICES[nombreCat]) {
+        strongPrecio.innerHTML = `S/ ${ROOM_PRICES[nombreCat]} <small>/ noche</small>`;
+      }
+
+      // 🔥 SOLUCIÓN 3: Volver a asignar los eventos de clic a las tarjetas nuevas
+      const roomLink = nuevaTarjeta.querySelector(".room-link");
+      if (roomLink) {
+        roomLink.addEventListener("click", () => openPreview(nombreCat));
+      }
+
+      const viewImage = nuevaTarjeta.querySelector(".view-image");
+      if (viewImage) {
+        viewImage.addEventListener("click", () => openPreview(nombreCat));
+      }
+
       const roomNumberSpan = nuevaTarjeta.querySelector(".room-number");
       if (roomNumberSpan) {
         roomNumberSpan.textContent = `${ROOM_LABELS[categoriaKey]} ${nuevaTarjeta.dataset.roomNumber}`;
@@ -1771,9 +1801,14 @@ function renderReservationsTable() {
         
         if (!respuesta.ok) throw new Error("Error en servidor");
         
-        await sincronizarReservasDesdeBackend();
-        renderAdmin();
         showToast(`Pago actualizado a ${sel.value}.`);
+        
+        // Bloqueo seguro para errores visuales
+        try {
+          await sincronizarReservasDesdeBackend();
+          renderAdmin();
+        } catch (uiError) { console.error("Error visual al actualizar pago:", uiError); }
+        
       } catch (error) {
         console.error("Error al actualizar el pago:", error);
         showToast("Error al actualizar el pago.");
@@ -1815,9 +1850,13 @@ function renderReservationsTable() {
         
         if (!respuesta.ok) throw new Error("Error en servidor");
 
-        await sincronizarReservasDesdeBackend();
-        renderAdmin();
         showToast(`Estado actualizado a ${sel.value}.`);
+
+        try {
+          await sincronizarReservasDesdeBackend();
+          renderAdmin();
+        } catch (uiError) { console.error("Error visual al actualizar estado:", uiError); }
+
       } catch (error) {
         console.error("Error al actualizar el estado:", error);
         showToast("Error al actualizar el estado.");
@@ -1911,12 +1950,16 @@ async function registerGuestCheckIn(id) {
     });
     if (!respuesta.ok) throw new Error();
     
-    await sincronizarReservasDesdeBackend();
-    renderAdmin();
-    showToast(`Entrada registrada.`);
+    showToast(`Entrada registrada con éxito.`);
+    
+    try {
+      await sincronizarReservasDesdeBackend();
+      renderAdmin();
+    } catch (visualError) { console.error("Fallo visual:", visualError); }
+
   } catch (error) {
     console.error("Error al registrar entrada:", error);
-    showToast("Error al registrar entrada.");
+    showToast("Error de red al registrar entrada.");
   }
 }
 
@@ -1947,12 +1990,16 @@ async function registerGuestCheckOut(id) {
     });
     if (!respuesta.ok) throw new Error();
 
-    await sincronizarReservasDesdeBackend();
-    renderAdmin();
-    showToast(`Salida registrada.`);
+    showToast(`Salida registrada con éxito.`);
+
+    try {
+      await sincronizarReservasDesdeBackend();
+      renderAdmin();
+    } catch (visualError) { console.error("Fallo visual:", visualError); }
+
   } catch (error) {
     console.error("Error al registrar salida:", error);
-    showToast("Error al registrar salida.");
+    showToast("Error de red al registrar salida.");
   }
 }
 
@@ -2656,10 +2703,14 @@ async function confirmRoomAssignment(roomNumber) {
     });
     if (!respuesta.ok) throw new Error();
 
-    await sincronizarReservasDesdeBackend();
     showToast(`Habitación ${roomNumber} asignada.`);
     closeRoomAssignModal();
-    renderAdmin();
+
+    try {
+      await sincronizarReservasDesdeBackend();
+      renderAdmin();
+    } catch (visualError) { console.error("Fallo visual:", visualError); }
+
   } catch (error) {
     console.error("Error al asignar habitación:", error);
     showToast("Error al asignar habitación.");
@@ -3701,7 +3752,7 @@ document.querySelectorAll("[data-chat-question]").forEach(button => {
    ============================================================ */
 sincronizarReservasDesdeBackend(); 
 sincronizarHabitacionesDesdeBackend(); 
-sincronizarEmpleadosDesdeBackend(); // 🔥 Ahora trae los empleados de la nube
+sincronizarEmpleadosDesdeBackend(); 
 updateNavAccount();
 updateCarouselArrows();
 refreshLocalDate();
