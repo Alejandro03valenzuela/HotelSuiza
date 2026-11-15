@@ -252,7 +252,7 @@ function renderizarTarjetasHabitaciones() {
 // ============================================================
 async function sincronizarHabitacionesDesdeBackend() {
   try {
-    const respuesta = await fetch("http://localhost:8080/api/habitaciones");
+    const respuesta = await fetch("https://hotelsuiza.onrender.com/api/habitaciones");
     if (!respuesta.ok) throw new Error("Error al obtener habitaciones");
 
     const habitaciones = await respuesta.json();
@@ -770,7 +770,7 @@ let haSincronizado = false;
 
 async function sincronizarReservasDesdeBackend() {
   try {
-    const respuesta = await fetch("http://localhost:8080/api/reservas");
+    const respuesta = await fetch("https://hotelsuiza.onrender.com/api/reservas");
     if (!respuesta.ok) throw new Error("Error al obtener reservas");
     
     const data = await respuesta.json();
@@ -1174,7 +1174,7 @@ document.getElementById("reserveForm").addEventListener("submit", async event =>
   };
 
   try {
-    const respuesta = await fetch("http://localhost:8080/api/reservas", {
+    const respuesta = await fetch("https://hotelsuiza.onrender.com/api/reservas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nuevaReserva)
@@ -1283,7 +1283,7 @@ document.getElementById("loginForm").addEventListener("submit", async event => {
   btnSubmit.disabled = true;
 
   try {
-    const respuesta = await fetch("http://localhost:8080/api/empleados/login", {
+    const respuesta = await fetch("https://hotelsuiza.onrender.com/api/empleados/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: user, password: pass })
@@ -1763,7 +1763,7 @@ function renderReservationsTable() {
       const targetId = item.databaseId || item.id;
 
       try {
-        const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+        const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(nuevaData)
@@ -1807,7 +1807,7 @@ function renderReservationsTable() {
       const targetId = item.databaseId || item.id;
 
       try {
-        const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+        const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(nuevaData)
@@ -1843,7 +1843,7 @@ function renderReservationsTable() {
       const targetId = item.databaseId || item.id;
 
       try {
-        const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+        const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
           method: "DELETE"
         });
         
@@ -1904,7 +1904,7 @@ async function registerGuestCheckIn(id) {
   const targetId = reservation.databaseId || reservation.id;
 
   try {
-    const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+    const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nuevaData)
@@ -1940,7 +1940,7 @@ async function registerGuestCheckOut(id) {
   const targetId = reservation.databaseId || reservation.id;
 
   try {
-    const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+    const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nuevaData)
@@ -2296,7 +2296,7 @@ let empleadosGlobales = [];
 
 async function sincronizarEmpleadosDesdeBackend() {
   try {
-    const respuesta = await fetch("http://localhost:8080/api/empleados");
+    const respuesta = await fetch("https://hotelsuiza.onrender.com/api/empleados");
     if (!respuesta.ok) throw new Error("Error al obtener empleados");
     empleadosGlobales = await respuesta.json();
   } catch (error) {
@@ -2381,7 +2381,7 @@ function renderEmployees() {
       if (!confirm) return;
 
       try {
-        const res = await fetch(`http://localhost:8080/api/empleados/${id}`, { method: "DELETE" });
+        const res = await fetch(`https://hotelsuiza.onrender.com/api/empleados/${id}`, { method: "DELETE" });
         if (!res.ok) throw new Error();
         await sincronizarEmpleadosDesdeBackend();
         renderEmployees();
@@ -2487,7 +2487,7 @@ if (employeeForm) {
 
     try {
       if (editingEmployeeId) {
-        const res = await fetch(`http://localhost:8080/api/empleados/${editingEmployeeId}`, {
+        const res = await fetch(`https://hotelsuiza.onrender.com/api/empleados/${editingEmployeeId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bodyData)
@@ -2496,7 +2496,7 @@ if (employeeForm) {
         recordAdminEvent(currentAdminLabel(), `Actualizó al empleado ${username}`);
         showToast("Empleado actualizado en la nube.");
       } else {
-        const res = await fetch("http://localhost:8080/api/empleados", {
+        const res = await fetch("https://hotelsuiza.onrender.com/api/empleados", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bodyData)
@@ -2649,7 +2649,7 @@ async function confirmRoomAssignment(roomNumber) {
   const targetId = item.databaseId || item.id;
 
   try {
-    const respuesta = await fetch(`http://localhost:8080/api/reservas/${targetId}`, {
+    const respuesta = await fetch(`https://hotelsuiza.onrender.com/api/reservas/${targetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nuevaData)
@@ -3105,7 +3105,7 @@ document.getElementById("userLoginForm").addEventListener("submit", async e => {
   btn.disabled = true;
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/login", {
+    const res = await fetch("https://hotelsuiza.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password: pass })
@@ -3149,7 +3149,7 @@ document.getElementById("registerForm").addEventListener("submit", async e => {
   btn.disabled = true;
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/register", {
+    const res = await fetch("https://hotelsuiza.onrender.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre: name, email, password: pass, telefono: "" })
@@ -3193,7 +3193,7 @@ document.getElementById("verifyForm").addEventListener("submit", async e => {
   btn.disabled = true;
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/verify", {
+    const res = await fetch("https://hotelsuiza.onrender.com/api/auth/verify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, codigo: code })
@@ -3269,7 +3269,7 @@ document.getElementById("passwordResetRequestForm").addEventListener("submit", a
   passwordResetHint.textContent = "Enviando solicitud...";
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/forgot-password", {
+    const res = await fetch("https://hotelsuiza.onrender.com/api/auth/forgot-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
@@ -3309,7 +3309,7 @@ passwordResetVerifyForm.addEventListener("submit", async event => {
   passwordResetHint.textContent = "Verificando...";
 
   try {
-    const res = await fetch("http://localhost:8080/api/auth/reset-password", {
+    const res = await fetch("https://hotelsuiza.onrender.com/api/auth/reset-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: resetEmailContext, codigo: enteredCode, password: newPassword })
@@ -3505,7 +3505,7 @@ if (supabaseForm) {
 
     try {
       // LLAMADO A LA API DE SPRING BOOT
-      const respuesta = await fetch("http://localhost:8080/api/reservas", {
+      const respuesta = await fetch("https://hotelsuiza.onrender.com/api/reservas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nuevaReserva)
