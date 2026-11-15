@@ -334,11 +334,14 @@ async function sincronizarHabitacionesDesdeBackend() {
       document.getElementById("resRoom"),
       document.getElementById("rRoom")
     ];
-    selects.forEach(select => {
+        selects.forEach(select => {
       if (!select) return;
       Array.from(select.options).forEach(option => {
-        const roomType = option.value;
+        // Limpiamos el texto por si ya se había modificado antes
+        let roomType = option.value.split(" - ")[0].trim(); 
+        
         if (ROOM_PRICES[roomType]) {
+          option.value = roomType; // 🔥 Forzamos a que el valor se quede limpio (Ej. "Habitación Simple")
           option.textContent = `${roomType} - S/ ${ROOM_PRICES[roomType]}/noche`;
         }
       });
