@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUIZA HOTEL | Luxury Experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <span>✦ UNA ESTADÍA QUE SE CONVIERTE EN RECUERDO</span>
+  <span>Ayuda y reservas: +51 939 179 538</span>
+</div>
+
+<header class="header" id="inicio">
+
+  <a class="brand" href="#inicio">
+    <span class="brand-mark">S</span>
+    <span>
+      <strong>Suiza</strong>
+      <small>HOTEL & EXPERIENCE</small>
+    </span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <nav class="nav" id="mainNav">
+    <a class="active" href="#inicio">Inicio</a>
+    <a href="#habitaciones">Habitaciones</a>
+    <a href="#experiencias">Experiencias</a>
+    <a href="#nosotros">Nosotros</a>
+    <div class="account-menu-wrap">
+      <button class="nav-account" id="navAccount" type="button" aria-controls="accountMenu" aria-expanded="false">
+        <span id="navAccountText">Mi cuenta</span>
+      </button>
+      <div class="account-menu" id="accountMenu" hidden>
+        <p class="account-menu-name" id="accountMenuName"></p>
+        <p class="account-menu-email" id="accountMenuEmail"></p>
+        <button class="account-logout" id="accountLogout" type="button">Cerrar sesión</button>
+      </div>
+    </div>
+    <button class="nav-account" id="navMyReservations" type="button" hidden>Mis reservas</button>
+    <a class="nav-book" href="#reservar">Reservar ahora ↗</a>
+  </nav>
+
+</header>
+
+<main>
+
+<!-- PORTADA -->
+
+<section class="hero">
+
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active"
+         style="background-image:url('img/simple/simple-1.jpg')"></div>
+    <div class="hero-slide"
+         style="background-image:url('img/doble/doble-2.jpg')"></div>
+    <div class="hero-slide"
+         style="background-image:url('img/suite/suite-1.jpg')"></div>
+    <div class="hero-slide"
+         style="background-image:url('img/deluxe/deluxe-1.jpg')"></div>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <p class="eyebrow">✦ HOSPITALIDAD CON ESENCIA</p>
+
+    <h1>
+      Tu próxima historia<br>
+      comienza <em>aquí.</em>
+    </h1>
+
+    <p class="hero-copy">
+      Un espacio donde el diseño, la calma y los pequeños
+      detalles hacen de cada estadía algo extraordinario.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#habitaciones" class="btn btn-gold">
+        Explorar habitaciones →
+      </a>
+
+      <a href="#experiencias" class="text-link">
+        Descubrir el hotel ↗
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESERVA DIRECTA -->
+
+<section class="reserve-section" id="reservar">
+  <div class="reserve-container">
+    <div class="reserve-text">
+      <p class="eyebrow dark-eyebrow">✦ RESERVA DIRECTA</p>
+      <h2>Tu estadía,<br><em>a tu manera.</em></h2>
+      <p>Elige tu habitación y fechas, revisa el monto y envía tu solicitud. La reserva quedará pendiente mientras el equipo verifica el adelanto por Yape.</p>
+      <ul class="reserve-perks">
+        <li>Consulta de disponibilidad por fechas</li>
+        <li>Adelanto y saldo detallados antes de enviar</li>
+        <li>Verificación manual del pago por el hotel</li>
+      </ul>
+      <a class="btn btn-whatsapp reserve-whatsapp" href="https://wa.me/51939179538?text=Hola%2C%20quisiera%20consultar%20sobre%20una%20reserva%20en%20Hotel%20Suiza." target="_blank" rel="noopener noreferrer">
+        Consultar por WhatsApp ↗
+      </a>
+    </div>
+
+    <form class="reserve-direct-form" id="supabaseForm">
+      <div class="reserve-form-heading">
+        <span class="reserve-form-kicker">HOTEL SUIZA · RESERVAS</span>
+        <h3>Solicita tu habitación</h3>
+        <p>Completa los datos de tu estadía. Los campos con * son obligatorios.</p>
+      </div>
+
+      <div class="reserve-step-label"><span>01</span> Habitación y fechas</div>
+      <div class="form-row reserve-search-filters">
+        <div class="form-group">
+          <label for="resRoom">Tipo de habitación <span aria-hidden="true">*</span></label>
+          <select id="resRoom" required>
+            <option value="Habitación Simple">Habitación Simple · S/ 180/noche</option>
+            <option value="Habitación Doble">Habitación Doble · S/ 260/noche</option>
+            <option value="Deluxe Premium">Deluxe Premium · S/ 340/noche</option>
+            <option value="Suite Suiza">Suite Suiza · S/ 490/noche</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resGuests">Huéspedes</label>
+          <select id="resGuests">
+            <option value="1">1 huésped</option>
+            <option value="2" selected>2 huéspedes</option>
+            <option value="3">3 huéspedes</option>
+            <option value="4">4 huéspedes</option>
+          </select>
+        </div>
+      </div>
+      <p class="room-availability" id="resRoomAvailability" aria-live="polite">Elige fechas para consultar habitaciones disponibles.</p>
+
+      <div class="availability-date-bar">
+        <span class="availability-date-icon" aria-hidden="true">▦</span>
+        <label class="availability-date-field" for="resCheckin">
+          <span>Check-in</span>
+          <input type="date" id="resCheckin" required>
+        </label>
+        <span class="availability-date-arrow" aria-hidden="true">→</span>
+        <label class="availability-date-field" for="resCheckout">
+          <span>Check-out</span>
+          <input type="date" id="resCheckout" required>
+        </label>
+        <button type="button" class="availability-toggle" id="availabilityToggle" aria-expanded="false" aria-controls="availabilityCalendar" aria-label="Mostrar calendario de disponibilidad">
+          <span aria-hidden="true">⌄</span>
+        </button>
+      </div>
+      <p class="availability-filter-summary" id="availabilityFilterSummary" aria-live="polite">Selecciona tipo de habitación, huéspedes y fechas para consultar disponibilidad.</p>
+
+      <section class="availability-calendar" id="availabilityCalendar" aria-labelledby="availabilityCalendarTitle" hidden>
+        <div class="availability-calendar-heading">
+          <div>
+            <h3 id="availabilityCalendarTitle">Disponibilidad por fecha</h3>
+            <p id="availabilityCalendarRoom" aria-live="polite">Selecciona una habitación para consultar sus fechas.</p>
+          </div>
+          <div class="availability-calendar-nav">
+            <button type="button" id="availabilityCalendarPrev" aria-label="Mes anterior">‹</button>
+            <strong id="availabilityCalendarMonth" aria-live="polite"></strong>
+            <button type="button" id="availabilityCalendarNext" aria-label="Mes siguiente">›</button>
+          </div>
+        </div>
+        <div class="availability-calendar-weekdays" aria-hidden="true">
+          <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+        </div>
+        <div class="availability-calendar-grid" id="availabilityCalendarGrid"></div>
+        <div class="availability-calendar-legend">
+          <span><i class="legend-dot available"></i>Disponible para pasar la noche</span>
+          <span><i class="legend-dot unavailable"></i>Sin cupos</span>
+        </div>
+        <p class="availability-calendar-hint" id="availabilityCalendarHint" aria-live="polite">Elige una fecha disponible de entrada y luego una salida. El cupo mostrado corresponde a esa noche.</p>
+      </section>
+
+      <div class="form-row">
+        <div class="form-group reserve-total-group">
+          <label>Precio total estimado</label>
+          <div class="price-display" id="resTotalPrice">S/ 0</div>
+        </div>
+      </div>
+
+      <div class="reserve-step-label"><span>02</span> Datos del huésped</div>
+      <div class="form-group">
+        <label for="resName">Nombre completo <span aria-hidden="true">*</span></label>
+        <input type="text" id="resName" required placeholder="Ej. Lucía Fernández">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="resEmail">Correo electrónico <span aria-hidden="true">*</span></label>
+          <input type="email" id="resEmail" required placeholder="correo@ejemplo.com">
+        </div>
+        <div class="form-group">
+          <label for="resPhone">Teléfono <span aria-hidden="true">*</span></label>
+          <input type="tel" id="resPhone" required placeholder="+51 939 179 538">
+        </div>
+      </div>
+
+      <div class="payment-breakdown">
+        <span>Adelanto (50%): <strong id="resDeposit">S/ 0.00</strong></span>
+        <span>Saldo al llegar: <strong id="resBalance">S/ 0.00</strong></span>
+      </div>
+      <div class="reserve-payment-heading">
+        <span class="reserve-step-number">03</span>
+        <div><h4>Adelanto por Yape</h4><p>La solicitud queda pendiente hasta que el hotel verifique el pago.</p></div>
+      </div>
+      <p class="payment-note">Envía el adelanto al <strong>939 179 538</strong> y registra el número de operación para identificar el pago.</p>
+      <label for="resPaymentReference">Número de operación de Yape <span aria-hidden="true">*</span>
+        <input id="resPaymentReference" required minlength="4" maxlength="40" pattern="[A-Za-z0-9]{4,40}" title="Ingresa el número o código de operación de Yape." autocomplete="off" placeholder="Ej. 123456789">
+      </label>
+      <details class="hotel-policies">
+        <summary>Leer políticas de reserva y cancelación</summary>
+        <p>Se requiere un adelanto del 50% para confirmar la reserva. El saldo se paga al llegar al hotel. Para cancelar, comunícate con el hotel al 939 179 538 e indica tu código de reserva. Si cancelas con al menos 48 horas antes del ingreso, se reembolsa el adelanto; con menos de 48 horas o en caso de no presentarte, el adelanto no es reembolsable.</p>
+      </details>
+      <label class="policy-consent">
+        <input id="resPolicyAccepted" type="checkbox" required>
+        <span>Acepto las políticas de reserva, pago y cancelación del Hotel Suiza.</span>
+      </label>
+      <button type="submit" class="btn btn-gold" id="supabaseSubmitBtn">
+        Enviar solicitud de reserva →
+      </button>
+      <p class="reserve-submit-note">Al continuar, aceptas las políticas de reserva, pago y cancelación del Hotel Suiza.</p>
+    </form>
+  </div>
+</section>
+
+
+<!-- HABITACIONES -->
+
+<section class="section rooms-section" id="habitaciones">
+
+  <div class="section-heading">
+
+    <div>
+      <p class="eyebrow dark-eyebrow">
+        ✦ DESCANSA A TU MANERA
+      </p>
+
+      <h2>
+        Habitaciones con<br>
+        <em>personalidad propia.</em>
+      </h2>
+    </div>
+
+    <p class="section-description">
+      Cada espacio ha sido diseñado para que encuentres
+      el equilibrio perfecto entre confort, estilo y tranquilidad.
+    </p>
+
+  </div>
+
+
+  <!-- PESTAÑAS -->
+
+  <div class="room-tabs-wrap">
+
+    <div class="room-filters" role="tablist">
+
+      <button class="filter-btn active"
+        data-target="simple"
+        role="tab"
+        aria-selected="true">
+        Habitación Simple
+      </button>
+
+      <button class="filter-btn"
+        data-target="doble"
+        role="tab"
+        aria-selected="false">
+        Habitación Doble
+      </button>
+
+      <button class="filter-btn"
+        data-target="deluxe"
+        role="tab"
+        aria-selected="false">
+        Deluxe Premium
+      </button>
+
+      <button class="filter-btn"
+        data-target="suite"
+        role="tab"
+        aria-selected="false">
+        Suite Suiza
+      </button>
+
+    </div>
+
+    <div class="tabs-footer">
+      <span class="tabs-caption">DESCUBRE TU ESPACIO IDEAL</span>
+      <div class="carousel-arrows">
+        <button class="carousel-btn" id="prevRoom" aria-label="Habitación anterior">‹</button>
+        <button class="carousel-btn" id="nextRoom" aria-label="Habitación siguiente">›</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- GALERÍA -->
+
+  <div class="room-carousel">
+  <div class="room-grid" id="roomGrid">
+
+    <!-- SIMPLE -->
+
+    <article class="room-card" data-category="simple">
+
+      <div class="room-image">
+
+        <img
+          src="img/simple/simple-1.jpg"
+          alt="Habitación Simple">
+
+        <span class="room-tag">ESENCIAL</span>
+
+        <span class="room-rating">
+          <b>8.9</b>
+          <span>★★★★★</span>
+        </span>
+
+        <button class="view-image">↗</button>
+
+      </div>
+
+      <div class="room-info">
+
+        <div class="room-title">
+
+          <div>
+            <span class="room-number">01 / CONFORT</span>
+            <h3>Habitación Simple</h3>
+          </div>
+
+          <strong>S/ 180 <small>/ noche</small></strong>
+
+        </div>
+
+        <p>
+          Tu refugio personal: comodidad, luz natural
+          y detalles pensados para descansar.
+        </p>
+
+        <div class="room-meta">
+          <span>♧ 1–2 personas</span>
+          <span>▣ 24 m²</span>
+          <span>⌁ Wi-Fi</span>
+        </div>
+
+        <button class="room-link" data-room="Habitación Simple">
+          Ver habitación <span>→</span>
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- DOBLE -->
+
+    <article class="room-card" data-category="doble">
+
+      <div class="room-image">
+
+        <img
+          src="img/doble/doble-1.jpg"
+          alt="Habitación Doble">
+
+        <span class="room-tag">FAVORITA</span>
+
+        <span class="room-rating">
+          <b>9.1</b>
+          <span>★★★★★</span>
+        </span>
+
+        <button class="view-image">↗</button>
+
+      </div>
+
+      <div class="room-info">
+
+        <div class="room-title">
+
+          <div>
+            <span class="room-number">02 / COMPARTIR</span>
+            <h3>Habitación Doble</h3>
+          </div>
+
+          <strong>S/ 260 <small>/ noche</small></strong>
+
+        </div>
+
+        <p>
+          Más espacio para compartir momentos,
+          con dos camas y una atmósfera acogedora.
+        </p>
+
+        <div class="room-meta">
+          <span>♧ 2–3 personas</span>
+          <span>▣ 32 m²</span>
+          <span>⌁ Wi-Fi</span>
+        </div>
+
+        <button class="room-link" data-room="Habitación Doble">
+          Ver habitación <span>→</span>
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- DELUXE -->
+
+    <article class="room-card" data-category="deluxe">
+
+      <div class="room-image">
+
+        <img
+          src="img/deluxe/deluxe-1.jpg"
+          alt="Deluxe Premium">
+
+        <span class="room-tag">PREMIUM</span>
+
+        <span class="room-rating">
+          <b>9.4</b>
+          <span>★★★★★</span>
+        </span>
+
+        <button class="view-image">↗</button>
+
+      </div>
+
+      <div class="room-info">
+
+        <div class="room-title">
+
+          <div>
+            <span class="room-number">03 / DISTINCIÓN</span>
+            <h3>Deluxe Premium</h3>
+          </div>
+
+          <strong>S/ 340 <small>/ noche</small></strong>
+
+        </div>
+
+        <p>
+          Diseño sofisticado, amplitud y comodidades
+          superiores para una estadía especial.
+        </p>
+
+        <div class="room-meta">
+          <span>♧ 2 personas</span>
+          <span>▣ 38 m²</span>
+          <span>⌁ Wi-Fi</span>
+        </div>
+
+        <button class="room-link" data-room="Deluxe Premium">
+          Ver habitación <span>→</span>
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- SUITE -->
+
+    <article class="room-card" data-category="suite">
+
+      <div class="room-image">
+
+        <img
+          src="img/suite/suite-1.jpg"
+          alt="Suite Suiza">
+
+        <span class="room-tag">EXPERIENCIA SUIZA</span>
+
+        <span class="room-rating">
+          <b>9.8</b>
+          <span>★★★★★</span>
+        </span>
+
+        <button class="view-image">↗</button>
+
+      </div>
+
+      <div class="room-info">
+
+        <div class="room-title">
+
+          <div>
+            <span class="room-number">04 / EXCLUSIVIDAD</span>
+            <h3>Suite Suiza</h3>
+          </div>
+
+          <strong>S/ 490 <small>/ noche</small></strong>
+
+        </div>
+
+        <p>
+          Un universo privado con sala independiente
+          y detalles de lujo para disfrutar sin prisa.
+        </p>
+
+        <div class="room-meta">
+          <span>♧ 2–4 personas</span>
+          <span>▣ 55 m²</span>
+          <span>⌁ Wi-Fi</span>
+        </div>
+
+        <button class="room-link" data-room="Suite Suiza">
+          Ver habitación <span>→</span>
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+  </div>
+
+</section>
+
+
+<!-- EXPERIENCIAS -->
+
+<section class="experience" id="experiencias">
+
+  <div class="experience-image"></div>
+
+  <div class="experience-content">
+
+    <p class="eyebrow">✦ MÁS QUE UNA HABITACIÓN</p>
+
+    <h2>
+      Los detalles hacen<br>
+      la diferencia.
+    </h2>
+
+    <p>
+      Despierta sin prisa, disfruta sabores especiales
+      y encuentra rincones creados para desconectar.
+      En Hotel Suiza, cada momento cuenta.
+    </p>
+
+    <div class="experience-points">
+
+      <div>
+        <b>✧</b>
+        <span>
+          <strong>Gastronomía</strong>
+          <small>Sabores que inspiran</small>
+        </span>
+      </div>
+
+      <div>
+        <b>✧</b>
+        <span>
+          <strong>Bienestar</strong>
+          <small>Espacios para reconectar</small>
+        </span>
+      </div>
+
+      <div>
+        <b>✧</b>
+        <span>
+          <strong>Atención personal</strong>
+          <small>Estamos en cada detalle</small>
+        </span>
+      </div>
+
+    </div>
+
+    <a href="#reservar" class="btn btn-gold">
+      Vive la experiencia →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- NOSOTROS -->
+
+<section class="about section" id="nosotros">
+
+  <p class="eyebrow dark-eyebrow">
+    ✦ NUESTRA FILOSOFÍA
+  </p>
+
+  <h2>
+    La hospitalidad se siente<br>
+    <em>en cada detalle.</em>
+  </h2>
+
+  <p class="about-copy">
+    Creemos que un gran viaje también se construye
+    con buenos descansos. Por eso combinamos espacios
+    cuidadosamente diseñados, atención cercana y una
+    experiencia que invita a volver.
+  </p>
+
+  <div class="stats">
+
+    <div>
+      <strong>24/7</strong>
+      <span>Atención al huésped</span>
+    </div>
+
+    <div>
+      <strong>100%</strong>
+      <span>Pasión por servir</span>
+    </div>
+
+    <div>
+      <strong>01</strong>
+      <span>Experiencia inolvidable</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="faq-section">
+  <h2 class="faq-title">Consejos para reservar un hotel</h2>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        ¿Cómo encontrar el hotel ideal para tu viaje? <span class="faq-icon">⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>Busca un lugar que se adapte a tus necesidades: revisa la ubicación, las comodidades de las habitaciones y las opiniones de otros huéspedes. En Suiza Hotel, ofrecemos un equilibrio perfecto entre diseño, confort y atención.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        ¿Cómo sé si el hotel ofrece cancelación gratuita? <span class="faq-icon">⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>Nuestra política de reserva directa te permite cancelar sin costo hasta 48 horas antes de tu llegada. Si reservas a través de nosotros, siempre tendrás flexibilidad garantizada.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        ¿Dónde puedo ver las opiniones de otros huéspedes? <span class="faq-icon">⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>Puedes leer comentarios reales en plataformas como Google Maps, TripAdvisor o Booking.com. Nuestra calificación promedio es de 9.4/10, destacando la limpieza y el trato del personal.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        ¿Puedo elegir la habitación al momento de reservar? <span class="faq-icon">⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>¡Claro! Si usas nuestro formulario de reserva directa, puedes especificar en el campo de huéspedes o al contactarnos qué tipo de habitación prefieres (Simple, Doble, Deluxe o Suite).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        ¿Qué debo tener en cuenta si voy a llegar tarde al hotel? <span class="faq-icon">⌄</span>
+      </button>
+      <div class="faq-answer">
+        <p>Si tu llegada será después de las 10:00 p.m., te recomendamos avisarnos respondiendo el correo de confirmación para que recepción tenga tu habitación preparada sin problemas.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="demo-location-section" id="ubicacion">
+  <div class="demo-location-copy">
+    <p class="eyebrow dark-eyebrow">✦ UBICACIÓN DE PRUEBA</p>
+    <h2>Hotel Suiza<br><em>en Ica, Perú.</em></h2>
+    <p>Este marcador es solo una referencia de demostración en la Plaza de Armas de Ica. No representa la dirección real del hotel.</p>
+    <a class="btn btn-dark" href="https://www.openstreetmap.org/?mlat=-14.0676&mlon=-75.7286#map=16/-14.0676/-75.7286" target="_blank" rel="noopener noreferrer">Abrir mapa →</a>
+  </div>
+  <iframe
+    title="Ubicación de demostración en la Plaza de Armas de Ica, Perú"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=-75.735%2C-14.073%2C-75.721%2C-14.062&layer=mapnik&marker=-14.0676%2C-75.7286"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <a class="brand footer-brand" href="#inicio">
+      <span class="brand-mark">A</span>
+      <span>
+        <strong>SUIZA</strong>
+        <small>HOTEL & EXPERIENCE</small>
+      </span>
+    </a>
+
+    <p>
+      Un lugar para detener el tiempo<br>
+      y disfrutar lo extraordinario.
+    </p>
+
+    <div class="footer-contact">
+      <span>¿Necesitas ayuda?</span>
+      <strong>+51 939 179 538</strong>
+      <a class="whatsapp-link" href="https://wa.me/51939179538?text=Hola%2C%20quisiera%20consultar%20sobre%20una%20reserva%20en%20Hotel%20Suiza." target="_blank" rel="noopener noreferrer">
+        <span aria-hidden="true">◉</span> Escribir por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 HOTEL SUIZA. Todos los derechos reservados.</span>
+    <span>Diseñado para vivir experiencias.</span>
+    <button class="admin-access" id="adminAccess">⚙ Acceso administrativo</button>
+  </div>
+
+</footer>
+
+
+<!-- MODAL DE HABITACIONES (GALERÍA + COMODIDADES) -->
+
+<div class="modal" id="roomModal" aria-hidden="true">
+
+  <div class="modal-backdrop" data-close></div>
+
+  <div class="modal-panel">
+
+    <button class="modal-close" data-close>×</button>
+
+    <div class="modal-gallery">
+      <img id="modalImage" src="" alt="">
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+
+    <div class="modal-text">
+
+      <span class="room-number">HOTEL SUIZA / HABITACIÓN</span>
+
+      <h2 id="modalTitle">Habitación</h2>
+
+      <p id="modalDescription"></p>
+
+      <div id="modalAmenities" class="modal-amenities"></div>
+
+      <a href="#reservar" class="btn btn-dark" id="modalBook" style="margin-top: 20px;">
+        Consultar esta habitación →
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- POPUP PEQUEÑO DE HABITACIÓN -->
+
+<div class="modal" id="roomPreview" aria-hidden="true">
+  <div class="modal-backdrop" data-pclose></div>
+  <div class="preview-card">
+    <button class="modal-close" data-pclose>×</button>
+    <img id="previewImage" src="" alt="">
+    <div class="preview-body">
+      <span class="preview-tag" id="previewTag">HABITACIÓN</span>
+      <h3 id="previewTitle"></h3>
+      <p id="previewText"></p>
+      <div class="preview-price" id="previewPrice"></div>
+
+      <div class="preview-lock" id="previewLock">
+        <div class="lock-notice">
+          <span class="lock-icon">ℹ</span>
+          <span>La información y disponibilidad son públicas. Crea una cuenta si quieres consultar tus reservas desde tu perfil.</span>
+        </div>
+        <button class="auth-forgot-link" id="previewLogin" type="button">Crear cuenta (opcional) →</button>
+      </div>
+
+      <div class="preview-unlocked" id="previewUnlocked">
+        <button class="btn btn-dark" id="previewFull">Ver detalles completos →</button>
+        <button class="btn btn-gold" id="previewReserve">Reservar esta habitación →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL DE AUTENTICACIÓN -->
+
+<div class="modal" id="authModal" aria-hidden="true">
+  <div class="modal-backdrop" data-aclose></div>
+  <div class="modal-panel auth-panel">
+    <button class="modal-close" data-aclose>×</button>
+    <div class="auth-body">
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth-tab="login">Iniciar sesión</button>
+        <button class="auth-tab" data-auth-tab="register">Crear cuenta</button>
+      </div>
+
+      <form class="auth-form active" data-auth-view="login" id="userLoginForm">
+        <h2>Bienvenido de nuevo</h2>
+        <p class="auth-sub">Accede para ver los detalles completos de las habitaciones.</p>
+        <label>Correo electrónico
+          <input type="email" id="userLoginEmail" required autocomplete="email">
+        </label>
+        <label>Contraseña
+          <input type="password" id="userLoginPass" required autocomplete="current-password">
+        </label>
+        <button class="auth-forgot-link" id="forgotPasswordLink" type="button">¿Olvidaste tu contraseña?</button>
+        <p class="login-error" id="userLoginError"></p>
+        <button class="btn btn-dark" type="submit">Ingresar →</button>
+      </form>
+
+      <form class="auth-form" data-auth-view="register" id="registerForm">
+        <h2>Crea tu cuenta</h2>
+        <p class="auth-sub">Verificaremos tu correo para proteger tu cuenta.</p>
+        <label>Nombre completo
+          <input id="regName" required autocomplete="name">
+        </label>
+        <label>Correo electrónico
+          <input type="email" id="regEmail" required autocomplete="email">
+        </label>
+        <label>Contraseña
+          <input type="password" id="regPass" required minlength="6" autocomplete="new-password">
+        </label>
+        <p class="login-error" id="regError"></p>
+        <button class="btn btn-gold" type="submit">Crear cuenta y verificar →</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE RECUPERACIÓN DE CONTRASEÑA -->
+
+<div class="modal" id="passwordResetModal" aria-hidden="true">
+  <div class="modal-backdrop" data-pwclose></div>
+  <div class="modal-panel verify-panel">
+    <button class="modal-close" data-pwclose>×</button>
+    <div class="verify-body">
+      <span class="room-number">HOTEL SUIZA / RECUPERACIÓN</span>
+      <h2>Restablece tu contraseña</h2>
+      <p>Te enviaremos un código de confirmación al correo registrado.</p>
+      <form id="passwordResetRequestForm">
+        <label class="reset-field-label" for="passwordResetEmail">Correo electrónico</label>
+        <input class="reset-text-input" id="passwordResetEmail" type="email" required autocomplete="email" placeholder="tu@correo.com">
+        <button class="btn btn-gold" type="submit">Enviar código →</button>
+      </form>
+      <p class="verify-hint" id="passwordResetHint" aria-live="polite"></p>
+      <form id="passwordResetVerifyForm" hidden>
+        <label class="reset-field-label" for="passwordResetCode">Código de confirmación</label>
+        <input class="reset-text-input reset-code-input" id="passwordResetCode" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" required autocomplete="one-time-code" placeholder="000000">
+        <label class="reset-field-label" for="passwordResetNewPassword">Nueva contraseña</label>
+        <input class="reset-text-input" id="passwordResetNewPassword" type="password" required minlength="6" autocomplete="new-password">
+        <button class="btn btn-gold" type="submit">Cambiar contraseña →</button>
+      </form>
+      <button class="auth-forgot-link reset-back-link" id="passwordResetBack" type="button">Volver a iniciar sesión</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL DE VERIFICACIÓN -->
+
+<div class="modal" id="verifyModal" aria-hidden="true">
+  <div class="modal-backdrop" data-vclose></div>
+  <div class="modal-panel verify-panel">
+    <button class="modal-close" data-vclose>×</button>
+    <div class="verify-body">
+      <span class="room-number">HOTEL SUIZA / VERIFICACIÓN</span>
+      <h2>Verifica tu correo</h2>
+      <p>Enviamos un código de 6 dígitos a <b id="verifyEmail"></b></p>
+      <p class="verify-hint" id="verifyHint"></p>
+      <form id="verifyForm">
+        <input id="verifyCode" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" placeholder="000000" required>
+        <button class="btn btn-gold" type="submit">Verificar →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL DE RESERVA (TRADICIONAL) -->
+
+<div class="modal" id="reserveModal" aria-hidden="true">
+
+  <div class="modal-backdrop" data-rclose></div>
+
+  <div class="modal-panel reserve-panel">
+
+    <button class="modal-close" data-rclose>×</button>
+
+    <div class="reserve-body">
+
+      <span class="room-number">HOTEL SUIZA / NUEVA RESERVA</span>
+      <h2>Confirma tu estadía</h2>
+      <p class="reserve-summary" id="reserveSummary"></p>
+
+      <form id="reserveForm" class="reserve-form">
+
+        <label>Nombre completo
+          <input id="rName" required placeholder="Ej. Lucía Fernández">
+        </label>
+
+        <label>Correo electrónico
+          <input type="email" id="rEmail" required placeholder="correo@ejemplo.com">
+        </label>
+
+        <label>Teléfono
+          <input id="rPhone" required placeholder="+51 939 179 538">
+        </label>
+
+        <label>Habitación
+          <select id="rRoom">
+            <option>Habitación Simple</option>
+            <option>Habitación Doble</option>
+            <option>Deluxe Premium</option>
+            <option>Suite Suiza</option>
+          </select>
+        </label>
+        <p class="room-availability" id="rRoomAvailability" aria-live="polite">Elige las fechas para consultar cupos disponibles.</p>
+
+        <div class="reserve-total">
+          <span>Total estimado</span>
+          <strong id="rTotal">S/ 0</strong>
+        </div>
+
+        <div class="payment-breakdown">
+          <span>Adelanto (50%): <strong id="rDeposit">S/ 0.00</strong></span>
+          <span>Saldo al llegar: <strong id="rBalance">S/ 0.00</strong></span>
+        </div>
+        <p class="payment-note">Paga el adelanto por Yape al <strong>939 179 538</strong> y escribe el número de operación. El hotel verificará el pago manualmente; la reserva queda pendiente hasta entonces.</p>
+        <label>Número de operación de Yape
+          <input id="rPaymentReference" required minlength="4" maxlength="40" pattern="[A-Za-z0-9]{4,40}" title="Ingresa el número o código de operación de Yape." autocomplete="off" placeholder="Ej. 123456789">
+        </label>
+        <details class="hotel-policies">
+          <summary>Leer políticas de reserva y cancelación</summary>
+          <p>Se requiere un adelanto del 50% para confirmar la reserva. El saldo se paga al llegar al hotel. Para cancelar, comunícate con el hotel al 939 179 538 e indica tu código de reserva. Si cancelas con al menos 48 horas antes del ingreso, se reembolsa el adelanto; con menos de 48 horas o en caso de no presentarte, el adelanto no es reembolsable.</p>
+        </details>
+        <label class="policy-consent">
+          <input id="rPolicyAccepted" type="checkbox" required>
+          <span>Acepto las políticas de reserva, pago y cancelación del Hotel Suiza.</span>
+        </label>
+        <button class="btn btn-gold" type="submit">Confirmar reserva →</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal" id="reservationReceiptModal" aria-hidden="true">
+  <div class="modal-backdrop" data-receipt-close></div>
+  <section class="modal-panel booking-panel" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+    <button class="modal-close" type="button" data-receipt-close aria-label="Cerrar">×</button>
+    <div class="booking-body">
+      <span class="room-number">HOTEL SUIZA / RESERVA</span>
+      <h2 id="receiptTitle">Reserva recibida</h2>
+      <p class="booking-intro">Guarda tu código para consultar tu reservación.</p>
+      <dl class="booking-details">
+        <div><dt>Código</dt><dd id="receiptReservationId"></dd></div>
+        <div><dt>Huésped</dt><dd id="receiptGuest"></dd></div>
+        <div><dt>Habitación</dt><dd id="receiptRoom"></dd></div>
+        <div><dt>Fechas</dt><dd id="receiptDates"></dd></div>
+        <div><dt>Huéspedes</dt><dd id="receiptGuests"></dd></div>
+        <div><dt>Noches</dt><dd id="receiptNights"></dd></div>
+        <div><dt>Total estimado</dt><dd id="receiptTotal"></dd></div>
+        <div><dt>Código para presentar en recepción</dt><dd id="receiptCode"></dd></div>
+        <div><dt>Adelanto / saldo</dt><dd id="receiptBalance"></dd></div>
+        <div><dt>Estado de reserva</dt><dd id="receiptStatus"></dd></div>
+        <div><dt>Pago</dt><dd id="receiptPayment"></dd></div>
+      </dl>
+      <p class="booking-sync-message" id="receiptSyncMessage"></p>
+      <div class="booking-actions">
+        <button class="btn btn-gold" id="receiptViewReservations" type="button">Ver mis reservas</button>
+        <button class="booking-secondary" type="button" data-receipt-close>Cerrar</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="myReservationsModal" aria-hidden="true">
+  <div class="modal-backdrop" data-my-reservations-close></div>
+  <section class="modal-panel booking-panel my-bookings-panel" role="dialog" aria-modal="true" aria-labelledby="myReservationsTitle">
+    <button class="modal-close" type="button" data-my-reservations-close aria-label="Cerrar">×</button>
+    <div class="booking-body">
+      <span class="room-number">HOTEL SUIZA / HUÉSPED</span>
+      <h2 id="myReservationsTitle">Mis reservas</h2>
+      <p class="booking-intro">Consulta tus estadías y el estado de pago.</p>
+      <div class="my-reservations-list" id="myReservationsList"></div>
+      <button class="booking-secondary" type="button" data-my-reservations-close>Cerrar</button>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL DE LOGIN ADMIN -->
+
+<div class="modal" id="adminLogin" aria-hidden="true">
+
+  <div class="modal-backdrop" data-lclose></div>
+
+  <div class="modal-panel login-panel">
+
+    <button class="modal-close" data-lclose>×</button>
+
+    <div class="login-body">
+
+      <span class="room-number">HOTEL SUIZA / ACCESO PRIVADO</span>
+      <h2>Panel administrativo</h2>
+      <p>Gestiona reservas, revisa reportes y exporta la información del hotel.</p>
+
+      <form id="loginForm" class="login-form">
+
+        <label>Usuario
+          <input id="loginUser" required autocomplete="username">
+        </label>
+
+        <label>Contraseña
+          <input type="password" id="loginPass" required autocomplete="current-password">
+        </label>
+
+        <p class="login-error" id="loginError"></p>
+
+        <button class="btn btn-dark" type="submit">Ingresar al panel →</button>
+        <small class="login-hint">Accesos separados para recepción: turno mañana y turno tarde.</small>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PANEL ADMINISTRATIVO -->
+
+<div class="admin-overlay" id="adminPanel" aria-hidden="true">
+  <div class="admin-shell">
+
+    <aside class="admin-side">
+
+      <div class="admin-brand">
+        <span class="brand-mark small">A</span>
+        <div>
+          <strong>SUIZA</strong>
+          <small>PANEL DE CONTROL</small>
+        </div>
+      </div>
+
+      <nav class="admin-nav">
+        <button class="admin-tab active" data-admin-tab="dashboard">◧ Dashboard</button>
+        <button class="admin-tab" data-admin-tab="reservas">▤ Reservas</button>
+        <button class="admin-tab" data-admin-tab="reportes">◔ Reportes</button>
+        <button class="admin-tab" data-admin-tab="huespedes">👤 Huéspedes</button>
+        <button class="admin-tab" data-admin-tab="habitaciones">🛏 Habitaciones</button>
+        <button class="admin-tab" data-admin-tab="empleados">👔 Empleados</button>
+        <button class="admin-tab" data-admin-tab="actividad">▤ Actividad</button>
+      </nav>
+
+      <div class="admin-side-foot">
+        <button id="adminExitSite">↩ Volver al sitio</button>
+        <button id="adminLogout">Cerrar sesión</button>
+      </div>
+
+    </aside>
+
+    <main class="admin-main">
+
+      <header class="admin-top">
+        <div>
+          <h1 id="adminTitle">Dashboard</h1>
+          <p id="adminSubtitle">Resumen general de operaciones</p>
+        </div>
+        <div class="admin-top-actions">
+          <div class="export-dropdown" id="exportDropdown">
+            <button class="btn-export" id="exportBtn" type="button" aria-expanded="false" aria-controls="exportMenu">
+              <span>⤓</span> Exportar ▾
+            </button>
+            <div class="dropdown-content" id="exportMenu">
+              <a href="#" data-export-format="jpg">Descargar reservas en JPG</a>
+              <a href="#" data-export-format="csv">Descargar reservas en CSV (Excel)</a>
+              <a href="#" data-export-format="guests">Descargar huéspedes en CSV (Excel)</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="admin-view active" data-view="dashboard">
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <span>TOTAL RESERVAS</span>
+            <strong id="kpiTotal">0</strong>
+            <small>registradas</small>
+          </div>
+          <div class="kpi">
+            <span>INGRESOS ESTIMADOS</span>
+            <strong id="kpiRevenue">S/ 0</strong>
+            <small>reservas activas</small>
+          </div>
+          <div class="kpi">
+            <span>NOCHES VENDIDAS</span>
+            <strong id="kpiNights">0</strong>
+            <small>acumuladas</small>
+          </div>
+          <div class="kpi">
+            <span>TICKET PROMEDIO</span>
+            <strong id="kpiAvg">S/ 0</strong>
+            <small>por reserva</small>
+          </div>
+        </div>
+
+        <div class="admin-cards">
+          <div class="admin-card">
+            <h3>Reservas por habitación</h3>
+            <div id="chartRooms" class="bar-chart"></div>
+          </div>
+          <div class="admin-card">
+            <h3>Últimas reservas</h3>
+            <div id="latestReservations" class="mini-list"></div>
+            <button type="button" class="latest-more" id="viewAllReservations" hidden>Ver más →</button>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="admin-view" data-view="reservas">
+
+        <div class="table-tools">
+          <input id="searchInput" placeholder="Buscar por huésped o código…">
+          <select id="statusFilter">
+            <option value="all">Todos los estados</option>
+            <option>Pendiente</option>
+            <option>Confirmada</option>
+            <option>Hospedado</option>
+            <option>Completada</option>
+            <option>Cancelada</option>
+          </select>
+          
+          <!-- NUEVOS FILTROS DE FECHA -->
+          <input type="date" id="filterDateStart" title="Check-in desde" style="width: 135px;">
+          <input type="date" id="filterDateEnd" title="Check-in hasta" style="width: 135px;">
+
+          <span class="table-count" id="tableCount">0 reservas</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Huésped</th>
+                <th>Habitación</th>
+                <th>N° Hab.</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>Noches</th>
+                <th>Total</th>
+                <th>Código de recepción</th>
+                <th>Pago</th>
+                <th>Estado</th>
+                <th>Entrada / salida registrada</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="reservationTable"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <section class="admin-view" data-view="reportes">
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <span>INGRESOS DEL PERIODO</span>
+            <strong id="repKpiRevenue12">S/ 0</strong>
+            <small id="repKpiRevenueSub">reservas no canceladas</small>
+          </div>
+          <div class="kpi">
+            <span>RESERVAS DEL PERIODO</span>
+            <strong id="repKpiCount12">0</strong>
+            <small>registradas</small>
+          </div>
+          <div class="kpi">
+            <span>OCUPACIÓN APROXIMADA</span>
+            <strong id="repKpiOccupancy">0%</strong>
+            <small>en el periodo seleccionado</small>
+          </div>
+          <div class="kpi">
+            <span>MEJOR MES / DÍA</span>
+            <strong id="repKpiBestMonth">—</strong>
+            <small id="repKpiBestMonthSub">sin datos</small>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="employee-header">
+            <h3>Ingresos históricos</h3>
+            
+            <div class="report-filters">
+              <select id="reportPeriodType">
+                <option value="year">Año</option>
+                <option value="month">Mes</option>
+                <option value="week">Semana</option>
+              </select>
+              
+              <select id="reportYearFilter"></select>
+              
+              <select id="reportMonthFilter" style="display:none;"></select>
+              
+              <input type="date" id="reportWeekFilter" style="display:none;" class="report-date-input">
+              
+              <button class="btn-filter" id="btnFilterReports" type="button">Filtrar</button>
+              <button class="btn-export" id="exportRevenueMonth" type="button">⤓ CSV</button>
+            </div>
+          </div>
+          <div id="reportMonthsRevenue" class="bar-chart vertical"></div>
+        </div>
+
+        <div class="admin-cards two">
+          <div class="admin-card">
+            <h3>Importes reservados por habitación</h3>
+            <div id="reportRevenue" class="bar-chart"></div>
+          </div>
+          <div class="admin-card">
+            <h3>Reservas por estado</h3>
+            <div id="reportStatus" class="donut-list"></div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3>Reservas por mes (últimos 6 meses)</h3>
+          <div id="reportMonths" class="bar-chart vertical"></div>
+        </div>
+
+      </section>
+
+      <section class="admin-view" data-view="huespedes">
+        <div class="admin-card">
+          <h3>Cuentas registradas</h3>
+          <p class="accounts-note">Se muestran las cuentas creadas en este navegador. Las contraseñas nunca se muestran.</p>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Nombre</th><th>Email</th><th>Verificación</th><th>Fecha de registro</th></tr></thead>
+              <tbody id="registeredAccountsTable"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3>Huéspedes con reservas</h3>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Huésped</th>
+                  <th>Email</th>
+                  <th>Reservas</th>
+                  <th>Gastado</th>
+                  <th>Estado Actual</th>
+                </tr>
+              </thead>
+              <tbody id="guestTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="habitaciones">
+        <div class="table-tools">
+          <label class="rooms-board-date">
+            Fecha:
+            <input type="date" id="roomsBoardDate">
+          </label>
+          <span class="table-count" id="roomsBoardCount"></span>
+        </div>
+        <div class="rooms-board" id="roomsBoard"></div>
+      </section>
+
+      <section class="admin-view" data-view="empleados">
+        <div class="admin-card">
+          <div class="employee-header">
+            <div>
+              <h3>Gestión de empleados</h3>
+              <p class="accounts-note">Crea, edita y desactiva usuarios del sistema. Las contraseñas se guardan localmente en este navegador (modo demo).</p>
+            </div>
+            <button class="btn-export" id="addEmployeeBtn" type="button">
+              <span>+</span> Nuevo empleado
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Nombre / cargo</th>
+                  <th>Rol</th>
+                  <th>Estado</th>
+                  <th>Último acceso</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="employeeTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3>Historial de accesos recientes</h3>
+          <div id="employeeAccessLog" class="mini-list"></div>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view="actividad">
+        <div class="admin-card">
+          <h3>Historial de actividad del sistema</h3>
+          <div class="table-wrap" style="margin-top: 15px;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Fecha y hora</th>
+                  <th>Usuario / Origen</th>
+                  <th>Acción realizada</th>
+                </tr>
+              </thead>
+              <tbody id="logsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="modal" id="roomAssignModal" aria-hidden="true">
+  <div class="modal-backdrop" data-room-assign-close></div>
+  <div class="modal-panel login-panel">
+    <button class="modal-close" data-room-assign-close>×</button>
+    <div class="login-body">
+      <span class="room-number">HOTEL SUIZA / ASIGNAR HABITACIÓN</span>
+      <h2>Asignar número de habitación</h2>
+      <p class="booking-intro" id="roomAssignInfo"></p>
+      <div id="roomAssignOptions" class="room-assign-options"></div>
+      <p class="login-error" id="roomAssignError"></p>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="employeeModal" aria-hidden="true">
+  <div class="modal-backdrop" data-employee-close></div>
+  <div class="modal-panel login-panel">
+    <button class="modal-close" data-employee-close>×</button>
+    <div class="login-body">
+      <span class="room-number">HOTEL SUIZA / EMPLEADOS</span>
+      <h2 id="employeeModalTitle">Nuevo empleado</h2>
+      <form id="employeeForm" class="login-form">
+        <label>Usuario (login)
+          <input id="empUsername" required autocomplete="off" pattern="[a-zA-Z0-9._-]{3,30}" title="3–30 caracteres, solo letras, números, punto, guion o guion bajo.">
+        </label>
+        <label>Nombre completo / cargo
+          <input id="empLabel" required maxlength="60">
+        </label>
+        <label>Contraseña
+          <input type="password" id="empPassword" required minlength="6" autocomplete="new-password">
+        </label>
+        <label>Rol
+          <select id="empRole">
+            <option value="admin">Administrador</option>
+            <option value="recepcion" selected>Recepción</option>
+            <option value="limpieza">Limpieza</option>
+          </select>
+        </label>
+        <label class="policy-consent">
+          <input id="empActive" type="checkbox" checked>
+          <span>Empleado activo (puede iniciar sesión)</span>
+        </label>
+        <p class="login-error" id="empError"></p>
+        <button class="btn btn-gold" type="submit">Guardar empleado →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="support-chat" id="supportChat">
+  <section class="support-chat-panel" id="supportChatPanel" aria-label="Asistente de ayuda" hidden>
+    <header class="support-chat-header">
+      <span class="support-chat-avatar" aria-hidden="true">A</span>
+      <div>
+        <strong>Suizi</strong>
+        <small><span class="support-chat-status"></span> Asistente virtual</small>
+      </div>
+      <button type="button" class="support-chat-close" id="supportChatClose" aria-label="Cerrar chat">×</button>
+    </header>
+    <div class="support-chat-messages" id="supportChatMessages" role="log" aria-live="polite" aria-relevant="additions">
+      <div class="support-message bot">
+        <p>¡Hola! Soy Suizi, tu asistente de Hotel Suiza. Puedo ayudarte con habitaciones, precios y reservas. ¿Qué necesitas saber?</p>
+      </div>
+    </div>
+    <div class="support-chat-quick" aria-label="Preguntas frecuentes">
+      <button type="button" data-chat-question="¿Cuánto cuesta cada habitación?">Precios</button>
+      <button type="button" data-chat-question="¿Qué habitaciones tienen?">Habitaciones</button>
+      <button type="button" data-chat-question="¿Cómo puedo reservar?">Reservar</button>
+      <button type="button" data-chat-question="¿Cómo me registro?">Crear cuenta</button>
+      <button type="button" data-chat-question="¿Dónde puedo ver mis reservas?">Mis reservas</button>
+    </div>
+    <form class="support-chat-form" id="supportChatForm">
+      <label class="sr-only" for="supportChatInput">Escribe tu pregunta</label>
+      <input id="supportChatInput" type="text" maxlength="300" placeholder="Escribe tu pregunta…" autocomplete="off" required>
+      <button type="submit" aria-label="Enviar mensaje">Enviar</button>
+    </form>
+  </section>
+  <button type="button" class="support-chat-launcher" id="supportChatLauncher" aria-controls="supportChatPanel" aria-expanded="false">
+    <span aria-hidden="true">✦</span> ¿Necesitas ayuda?
+  </button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="app-dialog-backdrop" id="appDialog" hidden>
+  <section class="app-dialog" role="alertdialog" aria-modal="true" aria-labelledby="appDialogTitle" aria-describedby="appDialogMessage" tabindex="-1">
+    <span class="app-dialog-mark" aria-hidden="true">S</span>
+    <h2 id="appDialogTitle">Hotel Suiza</h2>
+    <p id="appDialogMessage"></p>
+    <div class="app-dialog-actions">
+      <button class="app-dialog-cancel" id="appDialogCancel" type="button">Cancelar</button>
+      <button class="app-dialog-confirm" id="appDialogConfirm" type="button">Aceptar</button>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
